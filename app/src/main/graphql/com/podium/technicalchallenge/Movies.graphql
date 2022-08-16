@@ -1,0 +1,7 @@
+query GetMoviesQuery {
+  movies {
+    title
+    releaseDate
+    genres
+  }
+}

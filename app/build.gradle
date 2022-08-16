@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id("com.apollographql.apollo").version("2.5.5")
+    id("com.apollographql.apollo3").version("3.5.0")
 }
 
 android {
@@ -39,6 +39,10 @@ android {
 }
 
 dependencies {
+    implementation 'com.github.bumptech.glide:glide:4.13.2'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'
+
+    implementation("com.apollographql.apollo3:apollo-runtime:3.5.0")
 
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.4.2'
@@ -74,9 +78,5 @@ dependencies {
 }
 apollo {
     generateKotlinModels.set(true)
-
-    service("demo") {
-        sourceFolder.set("com/podium/technicalchallenge/demo")
-        rootPackageName.set("com.podium.technicalchallenge")
-    }
+    packageName.set("com.podium.technicalchallenge")
 }
