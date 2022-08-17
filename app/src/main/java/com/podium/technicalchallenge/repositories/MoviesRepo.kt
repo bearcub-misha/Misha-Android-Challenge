@@ -8,6 +8,8 @@ import com.podium.technicalchallenge.GetTopFiveMoviesQuery
 import com.podium.technicalchallenge.entity.Actor
 import com.podium.technicalchallenge.entity.Movie
 import com.podium.technicalchallenge.entity.MovieDetails
+import com.podium.technicalchallenge.type.Sort
+import com.podium.technicalchallenge.ui.common.view.SortDirection
 
 class MoviesRepo(private val apiClient: ApolloClient) {
 
@@ -24,9 +26,11 @@ class MoviesRepo(private val apiClient: ApolloClient) {
         return Result.Error(java.lang.Exception())
     }
 
-    suspend fun getMovies(): Result<List<Movie>?> {
+    suspend fun getMovies(sortBy: String, direction: SortDirection): Result<List<Movie>?> {
         val response = try {
-            apiClient.query(GetMoviesQuery()).execute()
+            val moviesSort = MoviesSort.valueOf(sortBy)
+            val direction = Sort.valueOf(direction.toString())
+            apiClient.query(GetMoviesQuery(moviesSort.propertyName, direction)).execute()
         } catch (e: Exception) {
             return Result.Error(java.lang.Exception())
         }
@@ -64,13 +68,19 @@ class MoviesRepo(private val apiClient: ApolloClient) {
     }
 }
 
+enum class MoviesSort(val propertyName: String) {
+    TITLE("title"),
+    POPULARITY("voteAverage")
+}
+
 private class MovieAdapter {
     companion object {
         fun adaptOrNull(movie: GetMoviesByGenreQuery.Movie?): Movie? {
             movie?.let {
                 return Movie(
-                    movie.id,
-                    movie.title,
+                    id = movie.id,
+                    title = movie.title,
+                    rating = movie.voteAverage,
                     imageUrl = movie.posterPath
                 )
             }
@@ -80,8 +90,9 @@ private class MovieAdapter {
         fun adaptOrNull(movie: GetMoviesQuery.Movie?): Movie? {
             movie?.let {
                 return Movie(
-                    movie.id,
-                    movie.title,
+                    id = movie.id,
+                    title = movie.title,
+                    rating = movie.voteAverage,
                     imageUrl = movie.posterPath
                 )
             }
@@ -91,8 +102,9 @@ private class MovieAdapter {
         fun adaptOrNull(movie: GetTopFiveMoviesQuery.Movie?): Movie? {
             movie?.let {
                 return Movie(
-                    movie.id,
-                    movie.title,
+                    id = movie.id,
+                    title = movie.title,
+                    rating = movie.voteAverage,
                     imageUrl = movie.posterPath
                 )
             }

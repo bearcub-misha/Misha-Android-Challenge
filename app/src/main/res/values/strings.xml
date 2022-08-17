@@ -9,4 +9,12 @@
 
     <string name="title_all_movies">All Movies</string>
     <string name="title_top_movies">Top 5 Movies</string>
+
+    <string name="sort_movie_title">Title</string>
+    <string name="sort_movie_popularity">Popularity</string>
+
+    <string-array name="sort_movies_array">
+        <item>@string/sort_movie_title</item>
+        <item>@string/sort_movie_popularity</item>
+    </string-array>
 </resources>

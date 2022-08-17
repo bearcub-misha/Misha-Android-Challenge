@@ -24,7 +24,7 @@ class MoviesAdapter(
         private var image: ImageView = itemView.findViewById(R.id.image)
 
         fun bind(movie: Movie, fragment: Fragment) {
-            title.text = movie.title
+            title.text = "${movie.title} (${movie.rating})"
             Glide.with(fragment)
                 .load(movie.imageUrl)
                 .into(image)

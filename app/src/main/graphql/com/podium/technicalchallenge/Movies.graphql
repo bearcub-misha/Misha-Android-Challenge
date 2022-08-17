@@ -1,8 +1,9 @@
-query GetMoviesQuery {
-  movies {
+query GetMoviesQuery($orderBy: String!, $sort: Sort!) {
+  movies(sort: $sort, orderBy: $orderBy) {
     id
     title
     posterPath
+    voteAverage
   }
 }
 
@@ -11,6 +12,7 @@ query GetTopFiveMoviesQuery {
         id
         title
         posterPath
+        voteAverage
     }
 }
 
@@ -19,6 +21,7 @@ query GetMoviesByGenreQuery($genre: String!) {
         id
         title
         posterPath
+        voteAverage
     }
 }
 
