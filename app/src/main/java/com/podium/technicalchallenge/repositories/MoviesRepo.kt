@@ -1,11 +1,13 @@
 package com.podium.technicalchallenge.repositories
 
 import com.apollographql.apollo3.ApolloClient
+import com.podium.technicalchallenge.GetMovieQuery
 import com.podium.technicalchallenge.GetMoviesByGenreQuery
 import com.podium.technicalchallenge.GetMoviesQuery
 import com.podium.technicalchallenge.GetTopFiveMoviesQuery
-import com.podium.technicalchallenge.entity.Genre
+import com.podium.technicalchallenge.entity.Actor
 import com.podium.technicalchallenge.entity.Movie
+import com.podium.technicalchallenge.entity.MovieDetails
 
 class MoviesRepo(private val apiClient: ApolloClient) {
 
@@ -47,6 +49,19 @@ class MoviesRepo(private val apiClient: ApolloClient) {
         }
         return Result.Error(java.lang.Exception())
     }
+
+    suspend fun getMoviesById(movieId: Int): Result<MovieDetails?> {
+        val response = try {
+            apiClient.query(GetMovieQuery(movieId)).execute()
+        } catch (e: Exception) {
+            return Result.Error(java.lang.Exception())
+        }
+
+        response.data?.movie?.let {
+            return Result.Success(MovieAdapter.adapt(it))
+        }
+        return Result.Error(java.lang.Exception())
+    }
 }
 
 private class MovieAdapter {
@@ -82,6 +97,18 @@ private class MovieAdapter {
                 )
             }
             return null
+        }
+
+        fun adapt(movie: GetMovieQuery.Movie): MovieDetails {
+            return MovieDetails(
+                title = movie.title,
+                rating = movie.voteAverage,
+                genres = movie.genres,
+                imageUrl = movie.posterPath,
+                description = movie.overview,
+                directorName = movie.director.name,
+                cast = movie.cast.map { actor -> Actor(actor.name) }
+            )
         }
     }
 }

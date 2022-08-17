@@ -44,6 +44,8 @@ class GenreMoviesFragment : BaseFragment() {
             MarginItemDecoration(resources.getDimensionPixelSize(R.dimen.movie_list_margin))
         )
 
+        binding.title.text = args.genre
+
         viewModel.stateLD.observe(viewLifecycleOwner) {
             binding.loadingIndicator.isVisible = it == LOADING
             binding.movieList.isVisible = it != LOADING

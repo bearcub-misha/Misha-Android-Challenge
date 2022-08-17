@@ -21,3 +21,20 @@ query GetMoviesByGenreQuery($genre: String!) {
         posterPath
     }
 }
+
+query GetMovie($movieId: Int!) {
+    movie(id: $movieId) {
+        id
+        title
+        voteAverage
+        genres
+        posterPath
+        overview
+        cast {
+            name
+        }
+        director {
+            name
+        }
+    }
+}
