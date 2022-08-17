@@ -14,12 +14,7 @@ class MoviesRepo {
         }
 
         response.data?.let {
-            return Result.Success(it.movies?.map { movie ->
-                MovieEntity(
-                    movie?.title ?: "",
-                    movie?.releaseDate ?: ""
-                )
-            })
+            return Result.Success(it.movies?.mapNotNull { movie -> Adapter.adaptOrNull(movie) })
         }
         return Result.Error(java.lang.Exception())
     }
@@ -30,5 +25,20 @@ class MoviesRepo {
             ?: MoviesRepo().also {
                 INSTANCE = it
             }
+    }
+}
+
+private class Adapter {
+    companion object {
+        fun adaptOrNull(movie: GetMoviesQuery.Movie?): MovieEntity? {
+            movie?.let {
+                return MovieEntity(
+                    movie.title,
+                    movie.releaseDate,
+                    imageUrl = movie.posterPath
+                )
+            }
+            return null
+        }
     }
 }

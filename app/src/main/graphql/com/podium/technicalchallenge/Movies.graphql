@@ -3,5 +3,6 @@ query GetMoviesQuery {
     title
     releaseDate
     genres
+    posterPath
   }
 }

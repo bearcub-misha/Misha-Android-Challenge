@@ -41,7 +41,7 @@ class DashboardFragment : Fragment() {
         }
 
         viewModel.moviesLD.observe(viewLifecycleOwner) {
-            binding.movieList.adapter = MoviesAdapter(it, object : MoviesAdapter.Listener {
+            binding.movieList.adapter = MoviesAdapter(this, it, object : MoviesAdapter.Listener {
                 override fun onMovieSelected(movie: MovieEntity) {
                     viewModel.onMovieSelected(movie)
                 }
