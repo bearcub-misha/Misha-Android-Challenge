@@ -1,4 +1,4 @@
-package com.podium.technicalchallenge.ui.allmovies
+package com.podium.technicalchallenge.ui.common
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,12 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.podium.technicalchallenge.R
-import com.podium.technicalchallenge.entity.MovieEntity
-import com.podium.technicalchallenge.ui.allmovies.MoviesAdapter.ViewHolder
+import com.podium.technicalchallenge.entity.Movie
+import com.podium.technicalchallenge.ui.common.MoviesAdapter.ViewHolder
 
 class MoviesAdapter(
     private val fragment: Fragment,
-    private val dataSet: List<MovieEntity>,
+    private val dataSet: List<Movie>,
     private val listener: Listener
 ) :
     RecyclerView.Adapter<ViewHolder>() {
@@ -23,11 +23,11 @@ class MoviesAdapter(
         private var title: TextView = itemView.findViewById(R.id.title)
         private var image: ImageView = itemView.findViewById(R.id.image)
 
-        fun bind(movie: MovieEntity, fragment: Fragment) {
+        fun bind(movie: Movie, fragment: Fragment) {
             title.text = movie.title
             Glide.with(fragment)
                 .load(movie.imageUrl)
-                .into(image);
+                .into(image)
         }
     }
 
@@ -47,6 +47,6 @@ class MoviesAdapter(
     override fun getItemCount() = dataSet.size
 
     interface Listener {
-        fun onMovieSelected(movie: MovieEntity)
+        fun onMovieSelected(movie: Movie)
     }
 }

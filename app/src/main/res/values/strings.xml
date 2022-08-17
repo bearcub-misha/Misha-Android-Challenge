@@ -5,4 +5,5 @@
     <string name="title_top_movies">Top</string>
     <string name="title_genres">Genres</string>
     <string name="title_movie_details">Movie Details</string>
+    <string name="title_genre_details">Genre Details</string>
 </resources>

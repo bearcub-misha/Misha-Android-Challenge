@@ -5,14 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import com.podium.technicalchallenge.R
 import com.podium.technicalchallenge.databinding.FragmentAllmoviesBinding
-import com.podium.technicalchallenge.entity.MovieEntity
+import com.podium.technicalchallenge.entity.Movie
 import com.podium.technicalchallenge.ui.BaseFragment
-import com.podium.technicalchallenge.ui.LoadingViewModel
 import com.podium.technicalchallenge.ui.LoadingViewModel.State.LOADING
 import com.podium.technicalchallenge.ui.MarginItemDecoration
+import com.podium.technicalchallenge.ui.common.MoviesAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AllMoviesFragment : BaseFragment() {
@@ -49,7 +48,7 @@ class AllMoviesFragment : BaseFragment() {
 
         viewModel.moviesLD.observe(viewLifecycleOwner) {
             binding.movieList.adapter = MoviesAdapter(this, it, object : MoviesAdapter.Listener {
-                override fun onMovieSelected(movie: MovieEntity) {
+                override fun onMovieSelected(movie: Movie) {
                     viewModel.onMovieSelected(movie)
                 }
             })

@@ -1,4 +1,4 @@
-package com.podium.technicalchallenge.ui.allmovies
+package com.podium.technicalchallenge.ui.genres.movies
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,17 +10,17 @@ import com.podium.technicalchallenge.ui.LoadingViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class AllMoviesViewModel(private val moviesRepo: MoviesRepo) : LoadingViewModel() {
+class GenreMoviesViewModel(private val moviesRepo: MoviesRepo) : LoadingViewModel() {
 
     val moviesLD: LiveData<List<Movie>>
         get() = _moviesLD
     private val _moviesLD = MutableLiveData<List<Movie>>(emptyList())
 
-    fun getMovies() {
+    fun getMovies(genre: String) {
         _stateLD.postValue(State.LOADING)
         viewModelScope.launch(Dispatchers.IO) {
             val result = try {
-                moviesRepo.getMovies()
+                moviesRepo.getMoviesByGenre(genre)
             } catch (e: Exception) {
                 Result.Error(e)
             }
@@ -37,6 +37,10 @@ class AllMoviesViewModel(private val moviesRepo: MoviesRepo) : LoadingViewModel(
     }
 
     fun onMovieSelected(movie: Movie) {
-        navigateTo(AllMoviesFragmentDirections.actionAllMoviesFragmentToMovieDetailsFragment(movie.id))
+        navigateTo(
+            GenreMoviesFragmentDirections.actionGenreMoviesFragmentToMovieDetailsFragment(
+                movie.id
+            )
+        )
     }
 }

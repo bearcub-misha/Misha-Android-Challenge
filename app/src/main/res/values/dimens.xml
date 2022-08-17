@@ -13,4 +13,7 @@
     <!-- movie item -->
     <dimen name="movie_item_padding_vertical">10dp</dimen>
     <dimen name="movie_item_padding_horizontal">20dp</dimen>
+
+    <!-- genre list -->
+    <dimen name="genre_list_margin">16dp</dimen>
 </resources>

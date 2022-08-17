@@ -29,7 +29,11 @@
         android:id="@+id/genresFragment"
         android:name="com.podium.technicalchallenge.ui.genres.GenresFragment"
         android:label="@string/title_top_movies"
-        tools:layout="@layout/fragment_genres" />
+        tools:layout="@layout/fragment_genres" >
+        <action
+            android:id="@+id/action_genresFragment_to_genreMoviesFragment"
+            app:destination="@id/genreMoviesFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/movieDetailsFragment"
@@ -39,6 +43,19 @@
         <argument
             android:name="movieId"
             app:argType="integer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/genreMoviesFragment"
+        android:name="com.podium.technicalchallenge.ui.genres.movies.GenreMoviesFragment"
+        android:label="@string/title_genre_details"
+        tools:layout="@layout/fragment_genre_movies">
+        <argument
+            android:name="genre"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_genreMoviesFragment_to_movieDetailsFragment"
+            app:destination="@id/movieDetailsFragment" />
     </fragment>
 
 </navigation>

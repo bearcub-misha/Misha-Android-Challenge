@@ -1,24 +1,26 @@
-package com.podium.technicalchallenge.ui.topmovies
+package com.podium.technicalchallenge.ui.genres.movies
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.navArgs
 import com.podium.technicalchallenge.R
-import com.podium.technicalchallenge.databinding.FragmentTopmoviesBinding
+import com.podium.technicalchallenge.databinding.FragmentAllmoviesBinding
+import com.podium.technicalchallenge.databinding.FragmentGenreMoviesBinding
 import com.podium.technicalchallenge.entity.Movie
 import com.podium.technicalchallenge.ui.BaseFragment
-import com.podium.technicalchallenge.ui.LoadingViewModel
+import com.podium.technicalchallenge.ui.LoadingViewModel.State.LOADING
 import com.podium.technicalchallenge.ui.MarginItemDecoration
 import com.podium.technicalchallenge.ui.common.MoviesAdapter
-import com.podium.technicalchallenge.ui.common.MoviesAdapter.Listener
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class TopMoviesFragment : BaseFragment() {
+class GenreMoviesFragment : BaseFragment() {
 
-    override val viewModel: TopMoviesViewModel by viewModel()
-    private var _binding: FragmentTopmoviesBinding? = null
+    override val viewModel: GenreMoviesViewModel by viewModel()
+    private val args: GenreMoviesFragmentArgs by navArgs()
+    private var _binding: FragmentGenreMoviesBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -26,7 +28,7 @@ class TopMoviesFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentTopmoviesBinding.inflate(inflater)
+        _binding = FragmentGenreMoviesBinding.inflate(inflater)
         return binding.root
     }
 
@@ -43,20 +45,19 @@ class TopMoviesFragment : BaseFragment() {
         )
 
         viewModel.stateLD.observe(viewLifecycleOwner) {
-            binding.loadingIndicator.isVisible = it == LoadingViewModel.State.LOADING
-            binding.movieList.isVisible = it != LoadingViewModel.State.LOADING
+            binding.loadingIndicator.isVisible = it == LOADING
+            binding.movieList.isVisible = it != LOADING
         }
 
         viewModel.moviesLD.observe(viewLifecycleOwner) {
-            binding.movieList.adapter =
-                MoviesAdapter(this, it, object : Listener {
-                    override fun onMovieSelected(movie: Movie) {
-                        viewModel.onMovieSelected(movie)
-                    }
-                })
+            binding.movieList.adapter = MoviesAdapter(this, it, object : MoviesAdapter.Listener {
+                override fun onMovieSelected(movie: Movie) {
+                    viewModel.onMovieSelected(movie)
+                }
+            })
         }
 
-        viewModel.getMovies()
+        viewModel.getMovies(args.genre)
     }
 
 }

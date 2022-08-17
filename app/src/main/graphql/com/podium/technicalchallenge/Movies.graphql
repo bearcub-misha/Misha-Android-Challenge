@@ -2,8 +2,22 @@ query GetMoviesQuery {
   movies {
     id
     title
-    releaseDate
-    genres
     posterPath
   }
+}
+
+query GetTopFiveMoviesQuery {
+    movies(sort: DESC, orderBy: "voteAverage", limit: 5) {
+        id
+        title
+        posterPath
+    }
+}
+
+query GetMoviesByGenreQuery($genre: String!) {
+    movies(genre: $genre) {
+        id
+        title
+        posterPath
+    }
 }

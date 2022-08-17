@@ -1,38 +1,33 @@
 package com.podium.technicalchallenge.ui.genres
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.podium.technicalchallenge.entity.MovieEntity
+import com.podium.technicalchallenge.entity.Genre
+import com.podium.technicalchallenge.repositories.GenresRepo
+import com.podium.technicalchallenge.repositories.Result
+import com.podium.technicalchallenge.ui.LoadingViewModel
+import com.podium.technicalchallenge.ui.genres.movies.GenreMoviesFragmentDirections
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import com.podium.technicalchallenge.repositories.Result
-import com.podium.technicalchallenge.repositories.MoviesRepo
-import com.podium.technicalchallenge.ui.BaseViewModel
 
-class GenresViewModel(private val moviesRepo: MoviesRepo) : BaseViewModel() {
+class GenresViewModel(private val genresRepo: GenresRepo) : LoadingViewModel() {
 
-    val moviesLD: LiveData<List<MovieEntity>>
-        get() = _moviesLD
-    private val _moviesLD = MutableLiveData<List<MovieEntity>>(emptyList())
+    val genresLD: LiveData<List<Genre>>
+        get() = _genresLD
+    private val _genresLD = MutableLiveData<List<Genre>>(emptyList())
 
-    val stateLD: LiveData<State>
-        get() = _stateLD
-    private val _stateLD = MutableLiveData(State.LOADING)
-
-    fun getMovies() {
+    fun getGenres() {
         _stateLD.postValue(State.LOADING)
         viewModelScope.launch(Dispatchers.IO) {
             val result = try {
-                moviesRepo.getMovies()
+                genresRepo.getGenres()
             } catch (e: Exception) {
                 Result.Error(e)
             }
             when (result) {
-                is Result.Success<List<MovieEntity>?> -> {
-                    _moviesLD.postValue(result.data)
+                is Result.Success<List<Genre>?> -> {
+                    _genresLD.postValue(result.data)
                     _stateLD.postValue(State.LOADED)
                 }
                 else -> {
@@ -42,11 +37,11 @@ class GenresViewModel(private val moviesRepo: MoviesRepo) : BaseViewModel() {
         }
     }
 
-    fun onMovieSelected(movie: MovieEntity) {
-        Log.d("Misha", "Selected!!! ${movie.title}")
-    }
-
-    enum class State {
-        LOADING, LOADED, ERROR
+    fun onGenreSelected(genre: Genre) {
+        navigateTo(
+            GenresFragmentDirections.actionGenresFragmentToGenreMoviesFragment(
+                genre.title
+            )
+        )
     }
 }
