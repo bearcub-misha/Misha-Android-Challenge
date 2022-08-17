@@ -14,22 +14,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aff71318-634e-424e-a9c5-046b3741cc98" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/podium/technicalchallenge/ui/common/view/MovieSortingSpinnerView.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_baseline_arrow_upward_24.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/movie_sorting_spinner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.0.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.0.2/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.0.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.0.2/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/graphql/com/podium/technicalchallenge/Movies.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/graphql/com/podium/technicalchallenge/Movies.graphql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/podium/technicalchallenge/entity/Models.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/podium/technicalchallenge/entity/Models.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/podium/technicalchallenge/repositories/GenresRepo.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/podium/technicalchallenge/repositories/GenresRepo.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/podium/technicalchallenge/repositories/MoviesRepo.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/podium/technicalchallenge/repositories/MoviesRepo.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/podium/technicalchallenge/ui/allmovies/AllMoviesFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/podium/technicalchallenge/ui/allmovies/AllMoviesFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/podium/technicalchallenge/ui/allmovies/AllMoviesViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/podium/technicalchallenge/ui/allmovies/AllMoviesViewModel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/podium/technicalchallenge/ui/common/MoviesAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/podium/technicalchallenge/ui/common/MoviesAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_allmovies.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_allmovies.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/podium/technicalchallenge/ui/genres/GenresViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/podium/technicalchallenge/ui/genres/GenresViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/podium/technicalchallenge/ui/genres/movies/GenreMoviesFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/podium/technicalchallenge/ui/genres/movies/GenreMoviesFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/podium/technicalchallenge/ui/genres/movies/GenreMoviesViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/podium/technicalchallenge/ui/genres/movies/GenreMoviesViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_genre_movies.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_genre_movies.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

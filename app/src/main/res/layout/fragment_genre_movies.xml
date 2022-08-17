@@ -14,6 +14,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.podium.technicalchallenge.ui.common.view.MovieSortingSpinnerView
+        android:id="@+id/sort_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/movieList"
         android:layout_width="0dp"
@@ -22,7 +29,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title" />
+        app:layout_constraintTop_toBottomOf="@id/sort_spinner" />
 
     <ProgressBar
         android:id="@+id/loading_indicator"

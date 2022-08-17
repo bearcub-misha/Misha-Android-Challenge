@@ -14,6 +14,8 @@ import com.podium.technicalchallenge.ui.BaseFragment
 import com.podium.technicalchallenge.ui.LoadingViewModel.State.LOADING
 import com.podium.technicalchallenge.ui.MarginItemDecoration
 import com.podium.technicalchallenge.ui.common.MoviesAdapter
+import com.podium.technicalchallenge.ui.common.view.OnChangedListener
+import com.podium.technicalchallenge.ui.common.view.SortDirection
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class GenreMoviesFragment : BaseFragment() {
@@ -40,6 +42,12 @@ class GenreMoviesFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.sortSpinner.setOnChangedListener(object : OnChangedListener {
+            override fun onChanged(sortBy: String, direction: SortDirection) {
+                viewModel.getMovies(args.genre, sortBy, direction)
+            }
+        })
+
         binding.movieList.addItemDecoration(
             MarginItemDecoration(resources.getDimensionPixelSize(R.dimen.movie_list_margin))
         )
@@ -59,7 +67,6 @@ class GenreMoviesFragment : BaseFragment() {
             })
         }
 
-        viewModel.getMovies(args.genre)
     }
 
 }

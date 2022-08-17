@@ -27,7 +27,7 @@ class GenresViewModel(private val genresRepo: GenresRepo) : LoadingViewModel() {
             }
             when (result) {
                 is Result.Success<List<Genre>?> -> {
-                    _genresLD.postValue(result.data)
+                    _genresLD.postValue(result.data?.sortedBy { it.title })
                     _stateLD.postValue(State.LOADED)
                 }
                 else -> {

@@ -10,7 +10,7 @@ class GenresRepo(private val apiClient: ApolloClient) {
         val response = try {
             apiClient.query(GetGenresQuery()).execute()
         } catch (e: Exception) {
-            return Result.Error(java.lang.Exception())
+            return Result.Error(e)
         }
 
         response.data?.let {

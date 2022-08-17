@@ -16,8 +16,8 @@ query GetTopFiveMoviesQuery {
     }
 }
 
-query GetMoviesByGenreQuery($genre: String!) {
-    movies(genre: $genre) {
+query GetMoviesByGenreQuery($genre: String!, $orderBy: String!, $sort: Sort!) {
+    movies(genre: $genre, sort: $sort, orderBy: $orderBy) {
         id
         title
         posterPath

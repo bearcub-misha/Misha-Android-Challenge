@@ -17,7 +17,7 @@ class MoviesRepo(private val apiClient: ApolloClient) {
         val response = try {
             apiClient.query(GetTopFiveMoviesQuery()).execute()
         } catch (e: Exception) {
-            return Result.Error(java.lang.Exception())
+            return Result.Error(e)
         }
 
         response.data?.let {
@@ -32,7 +32,7 @@ class MoviesRepo(private val apiClient: ApolloClient) {
             val direction = Sort.valueOf(direction.toString())
             apiClient.query(GetMoviesQuery(moviesSort.propertyName, direction)).execute()
         } catch (e: Exception) {
-            return Result.Error(java.lang.Exception())
+            return Result.Error(e)
         }
 
         response.data?.let {
@@ -41,11 +41,13 @@ class MoviesRepo(private val apiClient: ApolloClient) {
         return Result.Error(java.lang.Exception())
     }
 
-    suspend fun getMoviesByGenre(genre: String): Result<List<Movie>?> {
+    suspend fun getMoviesByGenre(genre: String, sortBy: String, direction: SortDirection): Result<List<Movie>?> {
         val response = try {
-            apiClient.query(GetMoviesByGenreQuery(genre)).execute()
+            val moviesSort = MoviesSort.valueOf(sortBy)
+            val direction = Sort.valueOf(direction.toString())
+            apiClient.query(GetMoviesByGenreQuery(genre, moviesSort.propertyName, direction)).execute()
         } catch (e: Exception) {
-            return Result.Error(java.lang.Exception())
+            return Result.Error(e)
         }
 
         response.data?.let {
@@ -58,7 +60,7 @@ class MoviesRepo(private val apiClient: ApolloClient) {
         val response = try {
             apiClient.query(GetMovieQuery(movieId)).execute()
         } catch (e: Exception) {
-            return Result.Error(java.lang.Exception())
+            return Result.Error(e)
         }
 
         response.data?.movie?.let {
