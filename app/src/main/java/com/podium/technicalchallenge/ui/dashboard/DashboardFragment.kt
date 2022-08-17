@@ -4,26 +4,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.textfield.TextInputLayout
-import com.podium.technicalchallenge.DemoViewModel
+import com.podium.technicalchallenge.R
 import com.podium.technicalchallenge.databinding.FragmentDashboardBinding
+import com.podium.technicalchallenge.entity.MovieEntity
 
 class DashboardFragment : Fragment() {
 
-    private val viewModel: DemoViewModel by activityViewModels()
+    private val viewModel: DashboardViewModel by viewModels()
     private var _binding: FragmentDashboardBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var tvTitle: TextView
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _binding = FragmentDashboardBinding.inflate(inflater)
         return binding.root
     }
@@ -36,14 +33,23 @@ class DashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        tvTitle = binding.tvTitle
-        tvTitle.text = "Podium Challenge"
+        binding.movieList.addItemDecoration(
+            MarginItemDecoration(resources.getDimensionPixelSize(R.dimen.movie_list_margin))
+        )
+
+        viewModel.stateLD.observe(viewLifecycleOwner) {
+        }
+
+        viewModel.moviesLD.observe(viewLifecycleOwner) {
+            binding.movieList.adapter = MoviesAdapter(it, object : MoviesAdapter.Listener {
+                override fun onMovieSelected(movie: MovieEntity) {
+                    viewModel.onMovieSelected(movie)
+                }
+            })
+        }
 
         viewModel.getMovies()
     }
 
-    companion object {
-        fun newInstance() = DashboardFragment()
-    }
 }
 

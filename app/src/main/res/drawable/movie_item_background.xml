@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <stroke
+        android:width="@dimen/background_width"
+        android:color="@color/black"></stroke>
+
+    <corners android:radius="@dimen/background_radius" />
+
+    <padding
+        android:bottom="@dimen/movie_item_padding_vertical"
+        android:left="@dimen/movie_item_padding_horizontal"
+        android:right="@dimen/movie_item_padding_horizontal"
+        android:top="@dimen/movie_item_padding_vertical" />
+</shape>
