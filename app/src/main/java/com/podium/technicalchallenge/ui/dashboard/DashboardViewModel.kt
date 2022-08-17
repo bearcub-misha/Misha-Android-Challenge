@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import com.podium.technicalchallenge.repositories.Result
 import com.podium.technicalchallenge.repositories.MoviesRepo
 
-class DashboardViewModel : ViewModel() {
+class DashboardViewModel(private val moviesRepo: MoviesRepo) : ViewModel() {
 
     val moviesLD: LiveData<List<MovieEntity>>
         get() = _moviesLD
@@ -25,7 +25,7 @@ class DashboardViewModel : ViewModel() {
         _stateLD.postValue(State.LOADING)
         viewModelScope.launch(Dispatchers.IO) {
             val result = try {
-                MoviesRepo.getInstance().getMovies()
+                moviesRepo.getMovies()
             } catch (e: Exception) {
                 Result.Error(e)
             }

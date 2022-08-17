@@ -1,14 +1,14 @@
 package com.podium.technicalchallenge.repositories
 
+import com.apollographql.apollo3.ApolloClient
 import com.podium.technicalchallenge.GetMoviesQuery
 import com.podium.technicalchallenge.entity.MovieEntity
-import com.podium.technicalchallenge.network.ApiClient
 
-class MoviesRepo {
+class MoviesRepo(private val apiClient: ApolloClient) {
 
     suspend fun getMovies(): Result<List<MovieEntity>?> {
         val response = try {
-            ApiClient.getInstance().provideApolloClient().query(GetMoviesQuery()).execute()
+            apiClient.query(GetMoviesQuery()).execute()
         } catch (e: Exception) {
             return Result.Error(java.lang.Exception())
         }
@@ -17,14 +17,6 @@ class MoviesRepo {
             return Result.Success(it.movies?.mapNotNull { movie -> Adapter.adaptOrNull(movie) })
         }
         return Result.Error(java.lang.Exception())
-    }
-
-    companion object {
-        private var INSTANCE: MoviesRepo? = null
-        fun getInstance() = INSTANCE
-            ?: MoviesRepo().also {
-                INSTANCE = it
-            }
     }
 }
 
