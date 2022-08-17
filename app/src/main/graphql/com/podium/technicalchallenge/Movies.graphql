@@ -1,5 +1,6 @@
 query GetMoviesQuery {
   movies {
+    id
     title
     releaseDate
     genres

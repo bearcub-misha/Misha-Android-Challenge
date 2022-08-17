@@ -1,19 +1,24 @@
-package com.podium.technicalchallenge.ui.dashboard
+package com.podium.technicalchallenge.ui.allmovies
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.podium.technicalchallenge.R
-import com.podium.technicalchallenge.databinding.FragmentDashboardBinding
+import com.podium.technicalchallenge.databinding.FragmentAllmoviesBinding
 import com.podium.technicalchallenge.entity.MovieEntity
+import com.podium.technicalchallenge.ui.BaseFragment
+import com.podium.technicalchallenge.ui.LoadingViewModel
+import com.podium.technicalchallenge.ui.LoadingViewModel.State.LOADING
+import com.podium.technicalchallenge.ui.MarginItemDecoration
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class DashboardFragment : Fragment() {
+class AllMoviesFragment : BaseFragment() {
 
-    private val viewModel: DashboardViewModel by viewModel()
-    private var _binding: FragmentDashboardBinding? = null
+    override val viewModel: AllMoviesViewModel by viewModel()
+    private var _binding: FragmentAllmoviesBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -21,7 +26,7 @@ class DashboardFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentDashboardBinding.inflate(inflater)
+        _binding = FragmentAllmoviesBinding.inflate(inflater)
         return binding.root
     }
 
@@ -38,6 +43,8 @@ class DashboardFragment : Fragment() {
         )
 
         viewModel.stateLD.observe(viewLifecycleOwner) {
+            binding.loadingIndicator.isVisible = it == LOADING
+            binding.movieList.isVisible = it != LOADING
         }
 
         viewModel.moviesLD.observe(viewLifecycleOwner) {

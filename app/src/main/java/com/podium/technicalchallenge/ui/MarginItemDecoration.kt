@@ -1,4 +1,4 @@
-package com.podium.technicalchallenge.ui.dashboard
+package com.podium.technicalchallenge.ui
 
 import android.graphics.Rect
 import android.view.View

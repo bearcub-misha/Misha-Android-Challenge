@@ -25,6 +25,7 @@ private class Adapter {
         fun adaptOrNull(movie: GetMoviesQuery.Movie?): MovieEntity? {
             movie?.let {
                 return MovieEntity(
+                    movie.id,
                     movie.title,
                     movie.releaseDate,
                     imageUrl = movie.posterPath

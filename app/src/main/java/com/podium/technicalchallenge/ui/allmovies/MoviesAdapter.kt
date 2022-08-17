@@ -1,4 +1,4 @@
-package com.podium.technicalchallenge.ui.dashboard
+package com.podium.technicalchallenge.ui.allmovies
 
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.podium.technicalchallenge.R
 import com.podium.technicalchallenge.entity.MovieEntity
-import com.podium.technicalchallenge.ui.dashboard.MoviesAdapter.ViewHolder
+import com.podium.technicalchallenge.ui.allmovies.MoviesAdapter.ViewHolder
 
 class MoviesAdapter(
     private val fragment: Fragment,

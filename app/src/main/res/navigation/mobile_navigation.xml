@@ -3,12 +3,42 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_dashboard">
+    app:startDestination="@+id/topMoviesFragment">
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.podium.technicalchallenge.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/allMoviesFragment"
+        android:name="com.podium.technicalchallenge.ui.allmovies.AllMoviesFragment"
+        android:label="@string/title_all_movies"
+        tools:layout="@layout/fragment_allmovies">
+        <action
+            android:id="@+id/action_allMoviesFragment_to_movieDetailsFragment"
+            app:destination="@id/movieDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/topMoviesFragment"
+        android:name="com.podium.technicalchallenge.ui.topmovies.TopMoviesFragment"
+        android:label="@string/title_top_movies"
+        tools:layout="@layout/fragment_topmovies">
+        <action
+            android:id="@+id/action_topMoviesFragment_to_movieDetailsFragment"
+            app:destination="@id/movieDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/genresFragment"
+        android:name="com.podium.technicalchallenge.ui.genres.GenresFragment"
+        android:label="@string/title_top_movies"
+        tools:layout="@layout/fragment_genres" />
+
+    <fragment
+        android:id="@+id/movieDetailsFragment"
+        android:name="com.podium.technicalchallenge.ui.moviedetails.MovieDetailsFragment"
+        android:label="@string/title_movie_details"
+        tools:layout="@layout/fragment_movie_details">
+        <argument
+            android:name="movieId"
+            app:argType="integer" />
+    </fragment>
 
 </navigation>

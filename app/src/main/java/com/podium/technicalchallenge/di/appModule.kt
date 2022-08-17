@@ -2,7 +2,10 @@ package com.podium.technicalchallenge.di
 
 import com.apollographql.apollo3.ApolloClient
 import com.podium.technicalchallenge.repositories.MoviesRepo
-import com.podium.technicalchallenge.ui.dashboard.DashboardViewModel
+import com.podium.technicalchallenge.ui.allmovies.AllMoviesViewModel
+import com.podium.technicalchallenge.ui.genres.GenresViewModel
+import com.podium.technicalchallenge.ui.moviedetails.MovieDetailsViewModel
+import com.podium.technicalchallenge.ui.topmovies.TopMoviesViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -18,5 +21,8 @@ val appModule = module {
 
     single { MoviesRepo(get()) }
 
-    viewModel { DashboardViewModel(get()) }
+    viewModel { TopMoviesViewModel(get()) }
+    viewModel { GenresViewModel(get()) }
+    viewModel { MovieDetailsViewModel(get()) }
+    viewModel { AllMoviesViewModel(get()) }
 }
